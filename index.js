@@ -1,25 +1,13 @@
-const cocktailShakerSort = (arr) => {
-  let swapped = true;
-  let start = 0;
-  let end = arr.length - 1;
-  while (swapped) {
-    swapped = false;
-    for (let i = start; i < end; i++) {
-      if (arr[i] > arr[i + 1]) {
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        swapped = true;
-      }
+function wiggleMaxLength(nums) {
+  if (nums.length === 0) return 0;
+  let up = 1;
+  let down = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > nums[i - 1]) {
+      up = down + 1;
+    } else if (nums[i] < nums[i - 1]) {
+      down = up + 1;
     }
-    if (!swapped) break;
-    swapped = false;
-    end--;
-    for (let i = end - 1; i >= start; i--) {
-      if (arr[i] > arr[i + 1]) {
-        [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
-        swapped = true;
-      }
-    }
-    start++;
   }
-  return arr;
-};
+  return Math.max(up, down);
+}
